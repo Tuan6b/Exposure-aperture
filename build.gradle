@@ -30,6 +30,23 @@ dependencies {
 	runtimeOnly 'org.anarres:jcpp:1.4.14'
 }
 
+// `gradlew prodClient`: a clean production 1.21.1 instance in run/prod with the real (intermediary) jars of this mod
+// and its stack. Anything extra dropped in run/prod/mods loads too; the edited pack goes in run/prod/shaderpacks.
+configurations { prodMods { transitive = false } }
+
+dependencies {
+	prodMods "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
+	prodMods "maven.modrinth:exposure:${exposure_version}"
+	prodMods "maven.modrinth:forge-config-api-port:${forgeconfigapiport_version}"
+	prodMods "maven.modrinth:iris:${iris_version}"
+	prodMods "maven.modrinth:sodium:${sodium_version}"
+}
+
+tasks.register('prodClient', net.fabricmc.loom.task.prod.ClientProductionRunTask) {
+	mods.from(configurations.prodMods, remapJar)
+	runDir = file('run/prod')
+}
+
 processResources {
 	def version = project.version
 	inputs.property 'version', version
