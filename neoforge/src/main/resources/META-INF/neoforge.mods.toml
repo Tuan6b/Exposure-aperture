@@ -5,9 +5,9 @@ license = "All Rights Reserved"
 [[mods]]
 modId = "exposure_aperture"
 version = "${version}"
-displayName = "Exposure Aperture"
+displayName = "Exposure: Aperture"
 authors = "Tuan6b"
-description = "Exposure cameras drive the shader's aperture and focal length (Lumarit, through Iris) while you look through them."
+description = "Exposure cameras drive the shader's aperture, focal length and shutter speed (Lumarit, through Iris) while you look through them."
 
 [[mixins]]
 config = "exposure_aperture.mixins.json"

@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "id": "exposure_aperture",
   "version": "${version}",
-  "name": "Exposure Aperture",
-  "description": "Exposure cameras drive the shader's aperture and focal length (Lumarit, through Iris) while you look through them.",
+  "name": "Exposure: Aperture",
+  "description": "Exposure cameras drive the shader's aperture, focal length and shutter speed (Lumarit, through Iris) while you look through them.",
   "authors": ["Tuan6b"],
   "environment": "*",
   "entrypoints": {
