@@ -8,6 +8,7 @@ import io.github.mortuusars.exposure.client.gui.component.CycleButton;
 import io.github.mortuusars.exposure.client.gui.screen.camera.button.ShutterSpeedButton;
 import io.github.mortuusars.exposure.util.Fov;
 import io.github.mortuusars.exposure.world.camera.Camera;
+import io.github.mortuusars.exposure.world.item.camera.CameraSettings;
 import java.util.List;
 import java.util.function.Consumer;
 import net.minecraft.client.Minecraft;
@@ -22,8 +23,8 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * Feeds the camera in use to the shader (read by the Iris uniforms in CommonUniformsMixin) and adds the aperture dial
- * to Exposure's camera controls. Nothing is written to the shader pack's settings: while no camera is in use both
- * values are 0 and Lumarit falls back to its own options, so they come back by themselves when the camera is lowered.
+ * to Exposure's camera controls. Nothing is written to the shader pack's settings: while no camera is in use every
+ * value is 0 and Lumarit falls back to its own options, so they come back by themselves when the camera is lowered.
  */
 public final class ExposureApertureClient {
 	private ExposureApertureClient() {
@@ -54,6 +55,12 @@ public final class ExposureApertureClient {
 	public static float focalLength() {
 		Viewfinder viewfinder = viewfinder();
 		return viewfinder == null ? 0f : (float) Fov.fovToFocalLength(viewfinder.zoom().getCurrentFov());
+	}
+
+	/** Exposure time in seconds of the camera in use (Exposure's own shutter speed dial); 0 when there is none. */
+	public static float shutterTime() {
+		Viewfinder viewfinder = viewfinder();
+		return viewfinder == null ? 0f : CameraSettings.SHUTTER_SPEED.getOrDefault(viewfinder.camera()).getDurationMilliseconds() / 1000f;
 	}
 
 	private static AbstractWidget apertureDial(Camera camera, int x, int y) {

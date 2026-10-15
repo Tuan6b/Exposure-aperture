@@ -23,6 +23,7 @@ public class CommonUniformsMixin {
 	private static void exposureAperture$addLensUniforms(UniformHolder uniforms, IdMap idMap, PackDirectives directives,
 			FrameUpdateNotifier updateNotifier, CallbackInfo ci) {
 		uniforms.uniform1f(UniformUpdateFrequency.PER_FRAME, "exposureFNumber", (FloatSupplier) ExposureApertureClient::fNumber)
-				.uniform1f(UniformUpdateFrequency.PER_FRAME, "exposureFocalLength", (FloatSupplier) ExposureApertureClient::focalLength);
+				.uniform1f(UniformUpdateFrequency.PER_FRAME, "exposureFocalLength", (FloatSupplier) ExposureApertureClient::focalLength)
+				.uniform1f(UniformUpdateFrequency.PER_FRAME, "exposureShutterTime", (FloatSupplier) ExposureApertureClient::shutterTime);
 	}
 }
