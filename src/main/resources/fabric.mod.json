@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "exposure_aperture",
+  "version": "${version}",
+  "name": "Exposure Aperture",
+  "description": "Exposure cameras drive the shader's aperture and focal length (Lumarit, through Iris) while you look through them.",
+  "authors": ["Tuan6b"],
+  "environment": "*",
+  "entrypoints": {
+    "main": ["io.github.tuan6b.exposureaperture.ExposureAperture"],
+    "client": ["io.github.tuan6b.exposureaperture.ExposureApertureClient"]
+  },
+  "mixins": ["exposure_aperture.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*",
+    "exposure": ">=1.9.19"
+  },
+  "recommends": {
+    "iris": "1.8.x"
+  }
+}
