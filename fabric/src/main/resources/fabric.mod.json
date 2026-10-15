@@ -7,8 +7,8 @@
   "authors": ["Tuan6b"],
   "environment": "*",
   "entrypoints": {
-    "main": ["io.github.tuan6b.exposureaperture.ExposureAperture"],
-    "client": ["io.github.tuan6b.exposureaperture.ExposureApertureClient"]
+    "main": ["io.github.tuan6b.exposureaperture.fabric.ExposureApertureFabric"],
+    "client": ["io.github.tuan6b.exposureaperture.fabric.ExposureApertureFabricClient"]
   },
   "mixins": ["exposure_aperture.mixins.json"],
   "depends": {

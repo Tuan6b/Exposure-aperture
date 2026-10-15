@@ -1,0 +1,42 @@
+plugins {
+	id 'net.neoforged.moddev' version "${moddev_version}"
+}
+
+base.archivesName = 'exposure-aperture-neoforge'
+
+repositories {
+	exclusiveContent {
+		forRepository { maven { name = 'Modrinth'; url = 'https://api.modrinth.com/maven' } }
+		filter { includeGroup 'maven.modrinth' }
+	}
+}
+
+// The shared code lives in ../common and is compiled here against the NeoForge jars of Exposure and Iris.
+sourceSets.main {
+	java.srcDir '../common/src/main/java'
+	resources.srcDir '../common/src/main/resources'
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+neoForge {
+	version = neoforge_version
+	runs {
+		client { client() }
+	}
+	mods {
+		exposure_aperture { sourceSet sourceSets.main }
+	}
+}
+
+dependencies {
+	implementation "maven.modrinth:exposure:${exposure_neoforge_version}"
+	implementation "maven.modrinth:iris:${iris_neoforge_version}"
+	runtimeOnly "maven.modrinth:sodium:${sodium_neoforge_version}"
+}
+
+processResources {
+	def version = project.version
+	inputs.property 'version', version
+	filesMatching('META-INF/neoforge.mods.toml') { expand 'version': version }
+}

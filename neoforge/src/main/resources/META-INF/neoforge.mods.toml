@@ -1,0 +1,41 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "All Rights Reserved"
+
+[[mods]]
+modId = "exposure_aperture"
+version = "${version}"
+displayName = "Exposure Aperture"
+authors = "Tuan6b"
+description = "Exposure cameras drive the shader's aperture and focal length (Lumarit, through Iris) while you look through them."
+
+[[mixins]]
+config = "exposure_aperture.mixins.json"
+
+[[dependencies.exposure_aperture]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.exposure_aperture]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,1.21.2)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.exposure_aperture]]
+modId = "exposure"
+type = "required"
+versionRange = "[1.9.19,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.exposure_aperture]]
+modId = "iris"
+type = "optional"
+versionRange = "[1.8,)"
+ordering = "NONE"
+side = "CLIENT"

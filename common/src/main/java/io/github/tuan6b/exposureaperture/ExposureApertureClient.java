@@ -9,14 +9,14 @@ import io.github.mortuusars.exposure.client.gui.screen.camera.button.ShutterSpee
 import io.github.mortuusars.exposure.util.Fov;
 import io.github.mortuusars.exposure.world.camera.Camera;
 import java.util.List;
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
-import net.fabricmc.fabric.api.client.screen.v1.Screens;
+import java.util.function.Consumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Tooltip;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,17 +25,17 @@ import org.jetbrains.annotations.Nullable;
  * to Exposure's camera controls. Nothing is written to the shader pack's settings: while no camera is in use both
  * values are 0 and Lumarit falls back to its own options, so they come back by themselves when the camera is lowered.
  */
-public class ExposureApertureClient implements ClientModInitializer {
-	@Override
-	public void onInitializeClient() {
-		ScreenEvents.AFTER_INIT.register((client, screen, width, height) -> {
-			if (!(screen instanceof ViewfinderCameraControlsScreen controls)) return;
-			List<AbstractWidget> widgets = Screens.getButtons(screen);
-			// Stacked on top of the shutter speed dial, wherever Exposure laid that out.
-			widgets.stream().filter(w -> w instanceof ShutterSpeedButton).findFirst()
-					.map(shutter -> apertureDial(controls.getCamera(), shutter.getX(), shutter.getY() - shutter.getHeight() - 1))
-					.ifPresent(widgets::add);
-		});
+public final class ExposureApertureClient {
+	private ExposureApertureClient() {
+	}
+
+	/** Each loader's "screen initialised" event lands here with the screen's widgets and a way to add one. */
+	public static void onScreenInit(Screen screen, List<? extends GuiEventListener> widgets, Consumer<? super AbstractWidget> add) {
+		if (!(screen instanceof ViewfinderCameraControlsScreen controls)) return;
+		// Stacked on top of the shutter speed dial, wherever Exposure laid that out.
+		widgets.stream().filter(w -> w instanceof ShutterSpeedButton).map(w -> (AbstractWidget) w).findFirst()
+				.map(shutter -> apertureDial(controls.getCamera(), shutter.getX(), shutter.getY() - shutter.getHeight() - 1))
+				.ifPresent(add);
 	}
 
 	/** The viewfinder the player is looking through right now, or null. */
