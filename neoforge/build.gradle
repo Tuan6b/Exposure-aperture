@@ -40,3 +40,7 @@ processResources {
 	inputs.property 'version', version
 	filesMatching('META-INF/neoforge.mods.toml') { expand 'version': version }
 }
+
+jar {
+	from(rootProject.file('LICENSE')) { rename { "${it}_exposure_aperture" } }
+}

@@ -1,12 +1,16 @@
 modLoader = "javafml"
 loaderVersion = "[4,)"
-license = "All Rights Reserved"
+license = "MIT"
+issueTrackerURL = "https://github.com/Tuan6b/Exposure-aperture/issues"
 
 [[mods]]
 modId = "exposure_aperture"
 version = "${version}"
 displayName = "Exposure: Aperture"
 authors = "Tuan6b"
+logoFile = "assets/exposure_aperture/icon.png"
+logoBlur = false
+displayURL = "https://github.com/Tuan6b/Exposure-aperture"
 description = "Exposure cameras drive the shader's aperture, focal length and shutter speed (Lumarit, through Iris) while you look through them."
 
 [[mixins]]

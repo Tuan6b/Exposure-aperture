@@ -5,6 +5,12 @@
   "name": "Exposure: Aperture",
   "description": "Exposure cameras drive the shader's aperture, focal length and shutter speed (Lumarit, through Iris) while you look through them.",
   "authors": ["Tuan6b"],
+  "license": "MIT",
+  "contact": {
+    "sources": "https://github.com/Tuan6b/Exposure-aperture",
+    "issues": "https://github.com/Tuan6b/Exposure-aperture/issues"
+  },
+  "icon": "assets/exposure_aperture/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": ["io.github.tuan6b.exposureaperture.fabric.ExposureApertureFabric"],
